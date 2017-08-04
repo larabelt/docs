@@ -176,4 +176,9 @@ return [
 
     'http_only' => true,
 
+    'basic' => [
+        'username' => env('BASIC_USERNAME'),
+        'password' => env('BASIC_PASSWORD'),
+    ]
+
 ];

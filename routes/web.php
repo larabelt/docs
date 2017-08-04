@@ -13,9 +13,18 @@
 |
 */
 
-Route::get('docs', DocsController::class . '@index');
-Route::get('docs/{doc}', DocsController::class . '@show');
 
-Route::get('/', function () {
-    return view('home.index');
-});
+
+Route::group([
+    'middleware' => ['auth.basic.once']
+],
+    function () {
+
+        Route::get('docs', DocsController::class . '@index');
+        Route::get('docs/{doc}', DocsController::class . '@show');
+
+        Route::get('/', function () {
+            return view('home.index');
+        });
+    }
+);
