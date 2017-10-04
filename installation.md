@@ -53,3 +53,4 @@ php artisan belt refresh
 ## Acknowledgments / Credits
 
 * [AdminLTE] (https://github.com/almasaeed2010/AdminLTE)
+* [Laravel] (https://laravel.com/)
