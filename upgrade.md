@@ -95,6 +95,13 @@ Vue.use(VueRouter);
 Vue.config.devtools = true;
 ```
 
+In `config/scout.php`, add/replace the following:
+
+```
+'driver' => env('SCOUT_DRIVER', 'null'),
+
+```
+
 <a name="v-1.3"></a>
 ## Upgrading to 1.3.*
 
