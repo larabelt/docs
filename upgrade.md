@@ -207,13 +207,13 @@ Run `php artisan belt-content:elastic import`
 
 <a name="v-1.4"></a>
 ## Upgrading to 1.4.*
-Add the following to your belt sass file `resources/assets/sass/belt.scss`.
+Add the following to your belt sass file `resources/assets/sass/belt.scss`:
 
 ```
 @import "~belt/spot/sass/base";
 ```
 
-Optionally, for catch-all route handling, add the following to end of the `map` method in `app/Providers/RouteServiceProvider.php` file.
+Optional. For catch-all route handling, add the following to end of the `map` method in `app/Providers/RouteServiceProvider.php` file.
 
 ```
 public function map() {
@@ -224,4 +224,52 @@ public function map() {
         ->any('{any?}', Belt\Content\Http\Controllers\CatchAllController::class . '@web')
         ->where('any', '(.*)');
 }
+```
+
+Optional. To allow public user registration, modify `config/belt/core.php`:
+
+```
+// ...
+'users' => [
+    'allow_public_signup' => true,
+    // ...
+],
+```
+
+Optional. To allow public team registration, modify `config/belt/core.php`:
+
+```
+// ...
+'users' => [
+    'allow_public_signup' => true,
+    // ...
+],
+'teams' => [
+    'allow_public_signup' => true,
+    // ...
+],
+```
+
+Optional. To send welcome emails to users and/or teams modify `config/belt/core.php`, accordingl:.
+
+```
+// ...
+'users' => [
+    'send_welcome_email' => true,
+    // ...
+],
+'teams' => [
+    'send_welcome_email' => true,
+    // ...
+],
+```
+
+Optional. To update welcome email content, locally overwrite these vendor views:
+
+```
+vendor/larabelt/core/resources/views/teams/emails/welcome.blade.php
+vendor/larabelt/core/resources/views/teams/emails/welcome_plain.blade.php
+vendor/larabelt/core/resources/views/users/emails/welcome.blade.php
+vendor/larabelt/core/resources/views/users/emails/welcome_plain.blade.php
+
 ```
