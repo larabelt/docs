@@ -210,6 +210,7 @@ Run `php artisan belt-content:elastic import`
 Add the following to your belt sass file `resources/assets/sass/belt.scss`:
 
 ```
+@import "~belt/clip/sass/base";
 @import "~belt/spot/sass/base";
 ```
 
@@ -272,4 +273,31 @@ vendor/larabelt/core/resources/views/teams/emails/welcome_plain.blade.php
 vendor/larabelt/core/resources/views/users/emails/welcome.blade.php
 vendor/larabelt/core/resources/views/users/emails/welcome_plain.blade.php
 
+```
+
+Optional. To add user and/or team web routes, modify `app/Providers/RouteServiceProvider.php`:
+
+```
+
+    // ...
+    
+    public function map()
+    {
+        // ...
+
+        include base_path('vendor/larabelt/core/routes/web/teams.php');
+        include base_path('vendor/larabelt/core/routes/web/users.php');
+
+        // ...
+    }
+    
+    // ...
+
+```
+
+Optional. To use the front-end vuejs components for user and/or team signups, incorporate the following:
+
+```
+import UserSignup from 'belt/core/js/users/signup';
+import TeamSignup from 'belt/core/js/teams/signup';
 ```
