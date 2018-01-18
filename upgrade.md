@@ -4,6 +4,7 @@
 - [v 1.2.*](#v-1.2)
 - [v 1.3.*](#v-1.3)
 - [v 1.4.*](#v-1.4)
+- [v 1.5.*](#v-1.5)
 
 <a name="misc"></a>
 ## General Upgrade Instructions
@@ -300,4 +301,24 @@ Optional. To use the front-end vuejs components for user and/or team signups, in
 ```
 import UserSignup from 'belt/core/js/users/signup';
 import TeamSignup from 'belt/core/js/teams/signup';
+```
+
+<a name="v-1.5"></a>
+## Upgrading to 1.5.*
+Add the following, and adjust accordingly, to your belt config file `config/belt/core.php`:
+
+```
+//...
+'permissible' => [
+        'available-roles' => [
+            'admin',
+            'editor' => 'do cool stuff',
+        ],
+        'available-abilities' => [
+            'alerts',
+            'users' => ['create', 'view', 'update'],
+        ],
+    ],
+    
+//...    
 ```
