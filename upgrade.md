@@ -305,20 +305,127 @@ import TeamSignup from 'belt/core/js/teams/signup';
 
 <a name="v-1.5"></a>
 ## Upgrading to 1.5.*
-Add the following, and adjust accordingly, to your belt config file `config/belt/core.php`:
+
+#### Index Table
+
+An index service has been added that will redundantly save select data to a common table `index`. This can be used to 
+conveniently populate auto-complete data where multiple types of data are allowed. In the future, this will power a
+replacement for the local search capability.
+
+In `\App\Providers\AppServiceProvider`, add the model classes you want to synchronized in the `index` table:
 
 ```
-//...
-'permissible' => [
-        'available-roles' => [
-            'admin',
-            'editor' => 'do cool stuff',
-        ],
-        'available-abilities' => [
-            'alerts',
-            'users' => ['create', 'view', 'update'],
-        ],
-    ],
+
+    // ...
     
-//...    
+    public function boot()
+    {
+        // ...
+
+        Belt\Spot\Deal::observe(Belt\Core\Observers\IndexObserver::class);
+        Belt\Spot\Event::observe(Belt\Core\Observers\IndexObserver::class);
+        Belt\Spot\Place::observe(Belt\Core\Observers\IndexObserver::class);
+
+        // ...
+    }
+    
+    // ...
+
+```
+
+Optional. To update the schema of `index` to include additional columns from other types, run:
+
+```
+php artisan belt-core:index merge-schema --type=:type   
+```
+
+Optional. To do a batch upsert of all data of a single type, run:
+
+```
+php artisan belt-core:index batch-upsert --type=:type   
+```
+
+#### Admin Access
+
+Optional. Pre-populate roles and abilities via a seeder, for example:
+
+```
+
+use Belt\Core\Ability;
+use Belt\Core\Role;
+use Illuminate\Database\Seeder;
+use Silber\Bouncer\BouncerFacade;
+
+class PermissibleSeeds extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Ability::unguard();
+        $abilities = [
+            // core
+            '*' => '*',
+            '' => [
+                'admin-dashboard',
+            ],
+            'alerts',
+            'teams',
+            'users',
+            // clip
+            'albums',
+            'attachments',
+            // content
+            'blocks',
+            'favorites',
+            'handles',
+            'pages',
+            'posts',
+            'touts',
+            // glue
+            'categories',
+            'tags',
+            // menu
+            'menu-groups',
+            'menu-items',
+            // spot
+            'amenities',
+            'deals',
+            'events',
+            'itineraries',
+            'places',
+        ];
+        foreach ($abilities as $entity_type => $set) {
+            if (is_numeric($entity_type)) {
+                $entity_type = $set;
+                $set = ['*', 'create', 'view', 'update', 'delete'];
+            }
+            $set = is_array($set) ? $set : [$set];
+            foreach ($set as $ability) {
+                Ability::firstOrCreate([
+                    'entity_type' => $entity_type ?: null,
+                    'name' => $ability,
+                    'entity_id' => null,
+                ]);
+            }
+        }
+
+        Role::firstOrCreate(['name' => 'super']);
+        Role::firstOrCreate(['name' => 'admin']);
+        Role::firstOrCreate(['name' => 'editor']);
+
+        BouncerFacade::allow('super')->everything();
+        BouncerFacade::allow('editor')->to('admin-dashboard');
+    }
+}
+
+```
+
+Optional. Run the following, to update roles (and role assignments):
+
+```
+php artisan belt-core:update --v=1.5.0   
 ```
