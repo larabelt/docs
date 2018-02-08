@@ -2,6 +2,7 @@
 
 - [v 1.3.*](#v-1.3)
 - [v 1.4.*](#v-1.4)
+- [v 1.5.*](#v-1.5)
 
 <a name="v-1.3"></a>
 ## 1.3.*
@@ -18,3 +19,19 @@ Added amenity templates, such as boolean, text and textarea, to allow for custom
 Convenience endpoint for attachments to get values like image.src.
 
 Events for User & Team creation. Listeners to send welcome emails for same.
+
+<a name="v-1.5"></a>
+## 1.5.*
+
+Packages updates.
+
+Db-based roles and abilities.
+
+Index table to group commonly searched data.
+
+"Related" items tab for Teams admin.
+
+Workflow.
+
+Wysiwyg improvements.
+

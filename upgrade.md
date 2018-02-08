@@ -306,6 +306,155 @@ import TeamSignup from 'belt/core/js/teams/signup';
 <a name="v-1.5"></a>
 ## Upgrading to 1.5.*
 
+#### Configuration
+
+In `.env`, incorporate:
+
+```
+MIX_LARABELT_EDITOR=tinymce
+MIX_VUEJS_DEBUG=false
+```
+
+Delete `resources/js/belt-bootstrap.js`. In `resources/js/belt-all.js` incorporate:
+
+```
+import BeltCore from 'belt/core/js/core';
+import BeltClip from 'belt/clip/js/clip';
+import BeltContent from 'belt/content/js/content';
+import BeltGlue from 'belt/glue/js/glue';
+import BeltMenu from 'belt/menu/js/menu';
+import BeltSpot from 'belt/spot/js/spot';
+
+Vue.config.devtools = process.env.MIX_VUEJS_DEBUG;
+
+/**
+ * Additional config options
+ */
+window.larabelt.clip.accept = 'image/*,application/pdf,text/plain';
+
+Vue.config.devtools = process.env.MIX_VUEJS_DEBUG;
+
+$(document).ready(function () {
+    new BeltCore([
+        BeltClip,
+        BeltContent,
+        BeltGlue,
+        BeltMenu,
+        BeltSpot
+    ]);
+});
+```
+
+In `webpack.mix.js`, incorporate:
+
+```
+const { mix } = require('laravel-mix');
+const path = require('path');
+
+mix.autoload({
+    'axios': ['axios'],
+    'jquery': ['jQuery', '$'],
+    'lodash': ['_'],
+    'vue': ['Vue']
+})
+
+/*
+ |--------------------------------------------------------------------------
+ | Mix Asset Management
+ |--------------------------------------------------------------------------
+ |
+ | Mix provides a clean, fluent API for defining some Webpack build steps
+ | for your Laravel application. By default, we are compiling the Sass
+ | file for the application as well as bundling up all the JS files.
+ |
+ */
+
+mix.webpackConfig({
+    resolve: {
+        modules: [
+            path.resolve(__dirname, 'resources'),
+            path.resolve(__dirname, 'vendor/larabelt/core/resources'),
+            path.resolve(__dirname, 'vendor/larabelt/clip/resources'),
+            path.resolve(__dirname, 'vendor/larabelt/content/resources'),
+            path.resolve(__dirname, 'vendor/larabelt/glue/resources'),
+            path.resolve(__dirname, 'vendor/larabelt/menu/resources'),
+            path.resolve(__dirname, 'vendor/larabelt/spot/resources'),
+            'node_modules'
+        ]
+    }
+});
+
+mix.copy("node_modules/admin-lte", 'public/plugins/admin-lte', false);
+mix.copy("node_modules/tinymce", 'public/plugins/tinymce', false);
+
+/**
+ * Admin JS
+ */
+mix.js('resources/assets/js/belt-all.js', 'public/js').version();
+mix.extract(['axios', 'jquery', 'lodash', 'vue']);
+
+/**
+ * Sass
+ */
+mix.sass('resources/assets/sass/app.scss', 'public/css').version();mix.sass('resources/assets/sass/belt.scss', 'public/css').version();
+```
+
+In `resources/sass/belt.scss`, incorporate:
+
+```
+@import "~belt/core/sass/base";
+@import "~belt/clip/sass/base";
+@import "~belt/content/sass/base";
+@import "~belt/spot/sass/base";
+
+$fa-font-path:"~font-awesome/fonts";
+@import "node_modules/font-awesome/scss/font-awesome";
+```
+
+In `package.json`, incorporate:
+
+```
+{
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "admin-lte": "^2.3.11",
+    "axios": "^0.15.2",
+    "bootstrap-sass": "^3.3.7",
+    "cross-env": "^5.1.1",
+    "dateformat": "^2.0.0",
+    "font-awesome": "^4.7.0",
+    "ionicons": "^3.0.0",
+    "jquery": "^3.2.0",
+    "js-cookie": "^2.1.4",
+    "laravel-mix": "^1.6.1",
+    "load-google-maps-api": "^1.0.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "slugify": "^1.1.0",
+    "tinymce": "^4.5.5",
+    "uri-js": "^3.0.2",
+    "vue": "^2.5.3",
+    "vue-codemirror": "^4.0.3",
+    "vue-loader": "^13.5.0",
+    "vue-mce": "^1.3.6",
+    "vue-resource": "^1.3.4",
+    "vue-router": "^3.0.1",
+    "vue-tinymce-editor": "^1.4.4",
+    "vuex": "^3.0.1"
+  }
+}
+
+```
+
+Replace references to `import './belt-bootstrap';` with `import 'belt/core/js/belt-bootstrap';`;
+
 #### Index Table
 
 An index service has been added that will redundantly save select data to a common table `index`. This can be used to 
