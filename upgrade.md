@@ -19,6 +19,7 @@ composer clear
 ```
 
 <a name="v-1.2"></a>
+
 ## Upgrading to 1.2.*
 
 Run `php artisan belt publish`
@@ -104,6 +105,7 @@ In `config/scout.php`, add/replace the following:
 ```
 
 <a name="v-1.3"></a>
+
 ## Upgrading to 1.3.*
 
 The following are optional elastic-related updates.
@@ -207,7 +209,9 @@ Run `php artisan belt-content:elastic replace-index`
 Run `php artisan belt-content:elastic import`
 
 <a name="v-1.4"></a>
+
 ## Upgrading to 1.4.*
+
 Add the following to your belt sass file `resources/assets/sass/belt.scss`:
 
 ```
@@ -304,6 +308,7 @@ import TeamSignup from 'belt/core/js/teams/signup';
 ```
 
 <a name="v-1.5"></a>
+
 ## Upgrading to 1.5.*
 
 #### Configuration
