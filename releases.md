@@ -3,6 +3,7 @@
 - [v 1.3.*](#v-1.3)
 - [v 1.4.*](#v-1.4)
 - [v 1.5.*](#v-1.5)
+- [v 1.6.*](#v-1.6)
 
 <a name="v-1.3"></a>
 ## 1.3.*
@@ -35,3 +36,9 @@ Workflow.
 
 Wysiwyg improvements.
 
+<a name="v-1.6"></a>
+## 1.6.*
+
+Updated sections admin UX.
+
+Updated available template param configurations.

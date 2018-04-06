@@ -5,6 +5,7 @@
 - [v 1.3.*](#v-1.3)
 - [v 1.4.*](#v-1.4)
 - [v 1.5.*](#v-1.5)
+- [v 1.6.*](#v-1.6)
 
 <a name="misc"></a>
 ## General Upgrade Instructions
@@ -581,5 +582,64 @@ class PermissibleSeeds extends Seeder
 Optional. Run the following, to update roles (and role assignments):
 
 ```
-php artisan belt-core:update --v=1.5.0   
+php artisan belt-core:update admin_roles
+```
+
+<a name="v-1.6"></a>
+
+## Upgrading to 1.6.*
+
+#### Templates
+
+Run update commands to update template-related config files:
+
+```
+// Create reorganized template config directory structure in temporary folder:
+php artisan belt-core:update templates create
+
+//Updated template config files in temporary folder per new format:
+php artisan belt-core:update templates update
+
+//Move old template files into archived path, and move temporary folder in:
+php artisan belt-core:update templates move
+
+//Update database per new templating strategies:
+php artisan belt-core:update templates db
+
+```
+
+#### Admin Access
+
+Replace the following event references:
+
+```
+\Belt\Spot\Events\DealCreated::class
+\Belt\Spot\Events\EventCreated::class
+\Belt\Spot\Events\PlaceCreated::class
+
+```
+with: 
+
+```
+'deals.created'
+'events.created' 
+'created.created' 
+
+```
+
+#### Welcome Emails
+
+Remove the following configuration values:
+
+```
+belt.core.teams.send_welcome_email
+belt.core.users.send_welcome_email
+```
+
+The following listeners still exist, but cannot be enabled via configuration. Instead, add them manually to your 
+`\App\Providers\EventServiceProvider`:
+
+```
+\Belt\Core\Listeners\SendTeamWelcomeEmail::class
+\Belt\Core\Listeners\SendUserWelcomeEmail::class
 ```
