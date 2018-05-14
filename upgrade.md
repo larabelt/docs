@@ -461,6 +461,8 @@ In `package.json`, incorporate:
 
 Replace references to `import './belt-bootstrap';` with `import 'belt/core/js/belt-bootstrap';`;
 
+In classes that extend `Belt\Core\Policies\BaseAdminPolicy` where `create()` function exists, add 2nd argument to match base class.
+
 #### Index Table
 
 An index service has been added that will redundantly save select data to a common table `index`. This can be used to 
@@ -582,7 +584,7 @@ class PermissibleSeeds extends Seeder
 Optional. Run the following, to update roles (and role assignments):
 
 ```
-php artisan belt-core:update admin_roles
+php artisan belt-core:update --v=1.5.0
 ```
 
 <a name="v-1.6"></a>
