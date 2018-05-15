@@ -312,6 +312,8 @@ import TeamSignup from 'belt/core/js/teams/signup';
 
 ## Upgrading to 1.5.*
 
+On server, run `sudo apt-get install libpng16-dev`.
+
 #### Configuration
 
 In `.env`, incorporate:
@@ -320,6 +322,8 @@ In `.env`, incorporate:
 MIX_LARABELT_EDITOR=tinymce
 MIX_VUEJS_DEBUG=false
 ```
+
+Delete `.babelrc`.
 
 Delete `resources/js/belt-bootstrap.js`. In `resources/js/belt-all.js` incorporate:
 
