@@ -6,6 +6,7 @@
 - [v 1.4.*](#v-1.4)
 - [v 1.5.*](#v-1.5)
 - [v 1.6.*](#v-1.6)
+- [v 2.0.*](#v-2.0)
 
 <a name="misc"></a>
 ## General Upgrade Instructions
@@ -314,6 +315,9 @@ import TeamSignup from 'belt/core/js/teams/signup';
 
 On server, run `sudo apt-get install libpng16-dev`.
 
+In tables that use the boolean `is_active`, ensure that any rows where `is_active=0` should in fact be inactive. 
+Possible tables include categories, events, itineraries, pages, places and posts.
+
 #### Configuration
 
 In `.env`, incorporate:
@@ -465,6 +469,10 @@ Replace references to `import './belt-bootstrap';` with `import 'belt/core/js/be
 
 In classes that extend `Belt\Core\Policies\BaseAdminPolicy` where `create()` function exists, add 2nd argument to match base class.
 
+Replace references to the `hasRole()` method of user objects. Replace with `can()`, as appropriate. See here for more information: 
+
+https://github.com/JosephSilber/bouncer#cheat-sheet
+
 #### Index Table
 
 An index service has been added that will redundantly save select data to a common table `index`. This can be used to 
@@ -593,6 +601,13 @@ php artisan belt-core:update --v=1.5.0
 
 ## Upgrading to 1.6.*
 
+In `resources/assets/sass/belt.scss`, remove:
+
+```
+$fa-font-path: "/fonts";
+@import "node_modules/font-awesome/scss/font-awesome";
+```
+
 #### Templates
 
 Run update commands to update template-related config files:
@@ -601,13 +616,16 @@ Run update commands to update template-related config files:
 // Create reorganized template config directory structure in temporary folder:
 php artisan belt-core:update templates create
 
-//Updated template config files in temporary folder per new format:
+// Updated template config files in temporary folder per new format:
 php artisan belt-core:update templates update
 
-//Move old template files into archived path, and move temporary folder in:
+// Move old template files into archived path, and move temporary folder in:
 php artisan belt-core:update templates move
 
-//Update database per new templating strategies:
+// Update blade files
+php artisan belt-core:update templates views
+
+// Update database per new templating strategies:
 php artisan belt-core:update templates db
 
 ```
@@ -646,4 +664,37 @@ The following listeners still exist, but cannot be enabled via configuration. In
 ```
 \Belt\Core\Listeners\SendTeamWelcomeEmail::class
 \Belt\Core\Listeners\SendUserWelcomeEmail::class
+```
+
+<a name="v-2.0"></a>
+
+## Upgrading to 2.0.*
+
+Follow these guides to upgrade your app to Laravel 5.5 and then Laravel 5.6:
+
+https://laravel.com/docs/5.5/upgrade
+
+https://laravel.com/docs/5.6/upgrade
+
+In `composer.json`, update all larabelt packages to `2.0.*`, then:
+
+```
+// remove from "require":
+
+"larabelt/glue"
+
+// optionally add to "require"
+
+"larabelt/alert": "2.0.*",
+"larabelt/elastic": "2.0.*",
+"larabelt/workflow": "2.0.*"
+
+```
+
+Seach and Replace:
+
+```
+belt/core/js/alerts/ctlr/dismissal belt/convo/js/alerts/ctlr/dismissal
+Belt\Core\Http\ViewComposers\AlertsComposer Belt\Convo\Http\ViewComposers\AlertsComposer
+Belt\Content\Elastic\Modifiers Belt\Elastic\Modifiers
 ```
