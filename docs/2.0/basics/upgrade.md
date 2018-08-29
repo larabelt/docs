@@ -1,14 +1,6 @@
 # Upgrade Guide
+[[toc]]
 
-- [General Instructions](#misc)
-- [v 1.2.*](#v-1.2)
-- [v 1.3.*](#v-1.3)
-- [v 1.4.*](#v-1.4)
-- [v 1.5.*](#v-1.5)
-- [v 1.6.*](#v-1.6)
-- [v 2.0.*](#v-2.0)
-
-<a name="misc"></a>
 ## General Upgrade Instructions
 
 Before following the specific upgrade instructions, be sure to also take these preliminary steps:
@@ -19,8 +11,6 @@ php artisan migrate
 composer clear
 
 ```
-
-<a name="v-1.2"></a>
 
 ## Upgrading to 1.2.*
 
@@ -105,8 +95,6 @@ In `config/scout.php`, add/replace the following:
 'driver' => env('SCOUT_DRIVER', 'null'),
 
 ```
-
-<a name="v-1.3"></a>
 
 ## Upgrading to 1.3.*
 
@@ -210,8 +198,6 @@ Run `php artisan belt-content:elastic replace-index`
 
 Run `php artisan belt-content:elastic import`
 
-<a name="v-1.4"></a>
-
 ## Upgrading to 1.4.*
 
 Add the following to your belt sass file `resources/assets/sass/belt.scss`:
@@ -308,8 +294,6 @@ Optional. To use the front-end vuejs components for user and/or team signups, in
 import UserSignup from 'belt/core/js/users/signup';
 import TeamSignup from 'belt/core/js/teams/signup';
 ```
-
-<a name="v-1.5"></a>
 
 ## Upgrading to 1.5.*
 
@@ -597,8 +581,6 @@ Optional. Run the following, to update roles (and role assignments):
 php artisan belt-core:update --v=1.5.0
 ```
 
-<a name="v-1.6"></a>
-
 ## Upgrading to 1.6.*
 
 In `resources/assets/sass/belt.scss`, remove:
@@ -665,8 +647,6 @@ The following listeners still exist, but cannot be enabled via configuration. In
 \Belt\Core\Listeners\SendTeamWelcomeEmail::class
 \Belt\Core\Listeners\SendUserWelcomeEmail::class
 ```
-
-<a name="v-2.0"></a>
 
 ## Upgrading to 2.0.*
 

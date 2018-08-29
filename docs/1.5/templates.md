@@ -1,10 +1,7 @@
 # Templates
 
-- [configuration](#configuration)
-- [params](#params)
-- [builder](#builder)
+[[toc]]
 
-<a name="configuration"></a>
 ## Configuration
 
 A templateable object needs a corresponding config file. For example, to define a default template for 
@@ -78,7 +75,6 @@ return [
 
 ```
 
-<a name="params"></a>
 ## Parameters
 
 As noted above in the template config examples, `params` can be added to a template.
@@ -104,7 +100,6 @@ touts
 itineraries
 ```
 
-<a name="builder"></a>
 ## Builder
 
 You can specify a builder class that extends `\Belt\Content\Builders\BaseBuilder`, that will run custom code when a 

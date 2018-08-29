@@ -1,0 +1,17 @@
+{
+  "name": "Larabelt-Docs",
+  "version": "0.0.1",
+  "description": "Larabelt Developer Documentation",
+  "repository": {
+    "url": "git@github.com:larabelt/docs.git",
+    "type": "git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs"
+  },
+  "dependencies": {
+    "vuepress": "^0.14.2"
+  }
+}

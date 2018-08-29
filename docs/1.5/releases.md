@@ -1,16 +1,10 @@
 # Release Notes
+[[toc]]
 
-- [v 1.3.*](#v-1.3)
-- [v 1.4.*](#v-1.4)
-- [v 1.5.*](#v-1.5)
-- [v 1.6.*](#v-1.6)
-
-<a name="v-1.3"></a>
 ## 1.3.*
 
 Refactored Elastic Search Engine to be more flexible.
 
-<a name="v-1.4"></a>
 ## 1.4.*
 
 Refactored amenities to be nested to allow for group definitions. 
@@ -21,7 +15,6 @@ Convenience endpoint for attachments to get values like image.src.
 
 Events for User & Team creation. Listeners to send welcome emails for same.
 
-<a name="v-1.5"></a>
 ## 1.5.*
 
 Packages updates.
@@ -36,7 +29,6 @@ Workflow.
 
 Wysiwyg improvements.
 
-<a name="v-1.6"></a>
 ## 1.6.*
 
 Updated sections admin UX.
