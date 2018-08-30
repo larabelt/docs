@@ -1,7 +1,7 @@
 # Installation
 [[toc]]
 
-##Initial
+## Initial
 ```
 # create .env file
 cp .env.example .env

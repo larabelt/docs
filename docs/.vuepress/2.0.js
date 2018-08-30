@@ -16,6 +16,13 @@ module.exports = [
             'params',
             'builder'
         ])
+    },
+    {
+        title: 'Forms',
+        collapsable: false,
+        children: prefix('forms', [
+            'general',
+        ])
     }
  ]
 
