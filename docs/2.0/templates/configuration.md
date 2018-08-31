@@ -3,7 +3,7 @@
 A templateable object needs a corresponding config file. For example, to define a default template for 
 `\Belt\Content\Page`, add a config file to `config\belt\templates\pages\default.php`:
 
-```
+```php
 <?php
 
 return [

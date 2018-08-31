@@ -1,11 +1,18 @@
 module.exports = [
     {
-        title: 'The Basics',
+        title: 'Prologue',
         collapsable: false,
-        children: prefix('basics', [
+        children: prefix('prologue', [
             'releases',
             'installation',
             'upgrade',
+        ])
+    },
+    {
+        title: 'The Basics',
+        collapsable: false,
+        children: prefix('basics', [
+            'commands',
         ])
     },
     {

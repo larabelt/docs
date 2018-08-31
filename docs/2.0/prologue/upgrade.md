@@ -5,14 +5,16 @@
 
 Before following the specific upgrade instructions, be sure to also take these preliminary steps:
 
-```
+```bash
 php artisan belt publish
 php artisan migrate
 composer clear
 
 ```
 
-## Upgrading to 1.2.*
+## Release Upgrades
+
+### Upgrading to 1.2.*
 
 Run `php artisan belt publish`
 
@@ -20,7 +22,7 @@ Add `"uri-js": "^3.0.2"` to the `dependencies` array in your `package.json` conf
 
 In `webpack.mix.js`, replace:
 
-```
+```js
 mix.js('resources/assets/js/belt-all.js', 'public/js');
 mix.sass('resources/assets/sass/app.scss', 'public/css');
 
@@ -29,7 +31,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css');
 with:
 
 
-```
+```js
 mix.js('resources/assets/js/belt-all.js', 'public/js').version();
 mix.sass('resources/assets/sass/app.scss', 'public/css').version();
 
@@ -37,7 +39,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css').version();
 
 Replace `resources/assets/js/belt-bootstrap.js` with:
 
-```
+```js
 import lodash from 'lodash';
 import jQuery from 'jquery';
 import vue from 'vue';
@@ -91,18 +93,17 @@ Vue.config.devtools = true;
 
 In `config/scout.php`, add/replace the following:
 
-```
+```php
 'driver' => env('SCOUT_DRIVER', 'null'),
-
 ```
 
-## Upgrading to 1.3.*
+### Upgrading to 1.3.*
 
 The following are optional elastic-related updates.
 
 Replace (and adjust accordingly) `config/belt/elastic/index.php` with:
 
-```
+```php
 $host = env('ELASTIC_HOST');
 
 return [
@@ -114,7 +115,7 @@ return [
 
 Add the `analysis` below to the array in `config/belt/elastic/settings.php` configuration file.
 
-```
+```php
 'analysis' => [
         'analyzer' => [],
         'normalizer' => [
@@ -125,7 +126,7 @@ Add the `analysis` below to the array in `config/belt/elastic/settings.php` conf
 
 Replace (and adjust accordingly for applicable data types) `config/belt/mappings/pages.php` with:
 
-```
+```php
 return [
     'properties' => [
         'id' => \Belt\Content\Elastic\ElasticConfigHelper::property('primary_key'),
@@ -147,7 +148,7 @@ return [
 
 Create new elastic service provider `app\Providers\BeltElasticServiceProvider.php`, and apply the desired modifiers for your project.
 
-```
+```php
 namespace App\Providers;
 
 use Belt;
@@ -198,18 +199,18 @@ Run `php artisan belt-content:elastic replace-index`
 
 Run `php artisan belt-content:elastic import`
 
-## Upgrading to 1.4.*
+### Upgrading to 1.4.*
 
 Add the following to your belt sass file `resources/assets/sass/belt.scss`:
 
-```
+```scss
 @import "~belt/clip/sass/base";
 @import "~belt/spot/sass/base";
 ```
 
 Optional. For catch-all route handling, add the following to end of the `map` method in `app/Providers/RouteServiceProvider.php` file.
 
-```
+```php
 public function map() {
     //..
 
@@ -222,7 +223,7 @@ public function map() {
 
 Optional. To allow public user registration, modify `config/belt/core.php`:
 
-```
+```php
 // ...
 'users' => [
     'allow_public_signup' => true,
@@ -232,7 +233,7 @@ Optional. To allow public user registration, modify `config/belt/core.php`:
 
 Optional. To allow public team registration, modify `config/belt/core.php`:
 
-```
+```php
 // ...
 'users' => [
     'allow_public_signup' => true,
@@ -246,7 +247,7 @@ Optional. To allow public team registration, modify `config/belt/core.php`:
 
 Optional. To send welcome emails to users and/or teams modify `config/belt/core.php`, accordingl:.
 
-```
+```php
 // ...
 'users' => [
     'send_welcome_email' => true,
@@ -265,12 +266,11 @@ vendor/larabelt/core/resources/views/teams/emails/welcome.blade.php
 vendor/larabelt/core/resources/views/teams/emails/welcome_plain.blade.php
 vendor/larabelt/core/resources/views/users/emails/welcome.blade.php
 vendor/larabelt/core/resources/views/users/emails/welcome_plain.blade.php
-
 ```
 
 Optional. To add user and/or team web routes, modify `app/Providers/RouteServiceProvider.php`:
 
-```
+```php
 
     // ...
     
@@ -290,12 +290,12 @@ Optional. To add user and/or team web routes, modify `app/Providers/RouteService
 
 Optional. To use the front-end vuejs components for user and/or team signups, incorporate the following:
 
-```
+```js
 import UserSignup from 'belt/core/js/users/signup';
 import TeamSignup from 'belt/core/js/teams/signup';
 ```
 
-## Upgrading to 1.5.*
+### Upgrading to 1.5.*
 
 On server, run `sudo apt-get install libpng16-dev`.
 
@@ -315,7 +315,7 @@ Delete `.babelrc`.
 
 Delete `resources/js/belt-bootstrap.js`. In `resources/js/belt-all.js` incorporate:
 
-```
+```js
 import BeltCore from 'belt/core/js/core';
 import BeltClip from 'belt/clip/js/clip';
 import BeltContent from 'belt/content/js/content';
@@ -343,7 +343,7 @@ $(document).ready(function () {
 
 In `webpack.mix.js`, incorporate:
 
-```
+```js
 const { mix } = require('laravel-mix');
 const path = require('path');
 
@@ -397,7 +397,7 @@ mix.sass('resources/assets/sass/app.scss', 'public/css').version();mix.sass('res
 
 In `resources/sass/belt.scss`, incorporate:
 
-```
+```scss
 @import "~belt/core/sass/base";
 @import "~belt/clip/sass/base";
 @import "~belt/content/sass/base";
@@ -409,7 +409,7 @@ $fa-font-path:"~font-awesome/fonts";
 
 In `package.json`, incorporate:
 
-```
+```json
 {
   "private": true,
   "scripts": {
@@ -465,7 +465,7 @@ replacement for the local search capability.
 
 In `\App\Providers\AppServiceProvider`, add the model classes you want to synchronized in the `index` table:
 
-```
+```php
 
     // ...
     
@@ -486,13 +486,13 @@ In `\App\Providers\AppServiceProvider`, add the model classes you want to synchr
 
 Optional. To update the schema of `index` to include additional columns from other types, run:
 
-```
+```bash
 php artisan belt-core:index merge-schema --type=:type   
 ```
 
 Optional. To do a batch upsert of all data of a single type, run:
 
-```
+```bash
 php artisan belt-core:index batch-upsert --type=:type   
 ```
 
@@ -500,8 +500,7 @@ php artisan belt-core:index batch-upsert --type=:type
 
 Optional. Pre-populate roles and abilities via a seeder, for example:
 
-```
-
+```php
 use Belt\Core\Ability;
 use Belt\Core\Role;
 use Illuminate\Database\Seeder;
@@ -572,20 +571,19 @@ class PermissibleSeeds extends Seeder
         BouncerFacade::allow('editor')->to('admin-dashboard');
     }
 }
-
 ```
 
 Optional. Run the following, to update roles (and role assignments):
 
-```
+```bash
 php artisan belt-core:update --v=1.5.0
 ```
 
-## Upgrading to 1.6.*
+### Upgrading to 1.6.*
 
 In `resources/assets/sass/belt.scss`, remove:
 
-```
+```scss
 $fa-font-path: "/fonts";
 @import "node_modules/font-awesome/scss/font-awesome";
 ```
@@ -594,7 +592,7 @@ $fa-font-path: "/fonts";
 
 Run update commands to update template-related config files:
 
-```
+```bash
 // Create reorganized template config directory structure in temporary folder:
 php artisan belt-core:update templates create
 
@@ -616,7 +614,7 @@ php artisan belt-core:update templates db
 
 Replace the following event references:
 
-```
+```php
 \Belt\Spot\Events\DealCreated::class
 \Belt\Spot\Events\EventCreated::class
 \Belt\Spot\Events\PlaceCreated::class
@@ -624,7 +622,7 @@ Replace the following event references:
 ```
 with: 
 
-```
+```php
 'deals.created'
 'events.created' 
 'created.created' 
@@ -635,7 +633,7 @@ with:
 
 Remove the following configuration values:
 
-```
+```php
 belt.core.teams.send_welcome_email
 belt.core.users.send_welcome_email
 ```
@@ -643,12 +641,12 @@ belt.core.users.send_welcome_email
 The following listeners still exist, but cannot be enabled via configuration. Instead, add them manually to your 
 `\App\Providers\EventServiceProvider`:
 
-```
+```php
 \Belt\Core\Listeners\SendTeamWelcomeEmail::class
 \Belt\Core\Listeners\SendUserWelcomeEmail::class
 ```
 
-## Upgrading to 2.0.*
+### Upgrading to 2.0.*
 
 Follow these guides to upgrade your app to Laravel 5.5 and then Laravel 5.6:
 
@@ -658,7 +656,7 @@ https://laravel.com/docs/5.6/upgrade
 
 In `composer.json`, update all larabelt packages to `2.0.*`, then:
 
-```
+```json
 // remove from "require":
 
 "larabelt/glue"
