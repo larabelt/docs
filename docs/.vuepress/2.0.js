@@ -30,6 +30,13 @@ module.exports = [
         children: prefix('forms', [
             'general',
         ])
+    },
+    {
+        title: 'Content',
+        collapsable: false,
+        children: prefix('content', [
+            'attachments',
+        ])
     }
  ]
 
