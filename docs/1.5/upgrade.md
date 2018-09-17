@@ -666,7 +666,7 @@ In `composer.json`, update all larabelt packages to `2.0.*`, then:
 
 // optionally add to "require"
 
-"larabelt/alert": "2.0.*",
+"larabelt/notify": "2.0.*",
 "larabelt/elastic": "2.0.*",
 "larabelt/workflow": "2.0.*"
 
@@ -675,7 +675,25 @@ In `composer.json`, update all larabelt packages to `2.0.*`, then:
 Seach and Replace:
 
 ```
-belt/core/js/alerts/ctlr/dismissal belt/convo/js/alerts/ctlr/dismissal
-Belt\Core\Http\ViewComposers\AlertsComposer Belt\Convo\Http\ViewComposers\AlertsComposer
+Belt\Core\Workflows\BaseWorkflow Belt\Workflow\Workflows\BaseWorkflow
 Belt\Content\Elastic\Modifiers Belt\Elastic\Modifiers
+Belt\Elastic\Modifiers\TemplateQueryModifier Belt\Elastic\Modifiers\SubtypeQueryModifier
+
+belt/clip/js belt/content/js
+belt/core/js/alerts/ctlr/dismissal belt/notify/js/alerts/ctlr/dismissal
+belt/core/js/inputs/filter-base belt/core/js/filters/base
+belt/core/js/inputs/filter-search belt/core/js/filters/search
+belt/core/js/inputs/priority/filter belt/core/js/filters/priority
+
+Belt\Clip\ Belt\Content\
+Belt\Core\Http\ViewComposers\AlertsComposer Belt\Notify\Http\ViewComposers\AlertsComposer
+Belt\Content\Behaviors\IncludesTemplate Belt\Core\Behaviors\IncludesSubtypes
+
+php artisan belt-content:elastic import php artisan belt-elastic:search upsert 
+
+morphable_type entity_type
+morphable_id entity_id
+
+GMAPS_API_KEY GOOGLE_API_KEY
+gmaps_api_key google_api_key
 ```
