@@ -1,4 +1,4 @@
 # Larabelt
 
-Cool stuff
+Documentation version landing page
 

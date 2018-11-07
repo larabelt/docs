@@ -1,4 +1,3 @@
-# Larabelt
+# Larabelts
 
-Cool stuff
-
+Main site page

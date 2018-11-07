@@ -1,7 +1,7 @@
 module.exports = [
     {
         title: 'Prologue',
-        collapsable: false,
+        collapsable: true,
         children: prefix('prologue', [
             'releases',
             'installation',
@@ -10,14 +10,14 @@ module.exports = [
     },
     {
         title: 'The Basics',
-        collapsable: false,
+        collapsable: true,
         children: prefix('basics', [
             'commands',
         ])
     },
     {
         title: 'Templating',
-        collapsable: false,
+        collapsable: true,
         children: prefix('templates', [
             'configuration',
             'params',
@@ -26,16 +26,47 @@ module.exports = [
     },
     {
         title: 'Forms',
-        collapsable: false,
+        collapsable: true,
         children: prefix('forms', [
             'general',
         ])
     },
     {
         title: 'Content',
-        collapsable: false,
+        collapsable: true,
         children: prefix('content', [
             'attachments',
+        ])
+    },
+    {
+        title: 'API',
+        collapsable: true,
+        children: prefix('api', [
+            'overview',
+            'abilities',
+            'alerts',
+            'amenities',
+            'attachments',
+            'blocks',
+            'config',
+            'deals',
+            'events',
+            'forms',
+            'handles',
+            'lists',
+            'menu-groups',
+            'overview',
+            'pages',
+            'places',
+            'posts',
+            'roles',
+            'search',
+            'teams',
+            'terms',
+            'user-favorites',
+            'users',
+            'work-requests',
+            'workflows'
         ])
     }
  ]

@@ -3,7 +3,7 @@ module.exports = {
     title: 'Larabelt',
     description: 'Larabelt DeveloperDocumentation',
     themeConfig: {
-        displayAllHeaders: true,
+        displayAllHeaders: false,
         sidebarDepth: 1,
 
         nav: [
