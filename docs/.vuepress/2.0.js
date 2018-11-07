@@ -25,6 +25,15 @@ module.exports = [
         ])
     },
     {
+        title: 'Resource Config Objects',
+        collapsable: true,
+        children: prefix('resource-config-objects', [
+            'params',
+            'param-groups',
+            'subtypes'
+        ])
+    },
+    {
         title: 'Forms',
         collapsable: true,
         children: prefix('forms', [
