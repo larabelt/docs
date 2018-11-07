@@ -1,8 +1,10 @@
 # Installation
+
 [[toc]]
 
 ## Initial
-```
+
+``` bash
 # create .env file
 cp .env.example .env
 
@@ -23,7 +25,7 @@ php artisan belt seed
 
 ## Asset Installation
 
-```
+``` bash
 # install node dependencies
 yarn install
 
@@ -34,14 +36,14 @@ npm run watch
 
 ## Clear App & PHP Cache
 
-```
+``` bash
 composer run-script clear; 
 sudo service php7.0-fpm restart;
 ```
 
 ## Misc
 
-```
+``` bash
 # run belt publish cmds
 php artisan belt publish
 
