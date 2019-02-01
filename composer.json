@@ -1,6 +1,7 @@
 {
     "name": "larabelt/docs",
     "description": "Docs package for any LaraBelt app.",
+    "keywords": ["cms", "laravel", "larabelt"],
     "authors": [
         {
             "name": "Matt Crowe",
@@ -14,5 +15,16 @@
     "require": {
         "binarytorch/larecipe": "^1.2"
     },
+    "autoload": {
+        "classmap": [
+            "updates"
+        ],
+        "psr-4": {
+            "Belt\\Docs\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
     "minimum-stability": "dev"
 }
