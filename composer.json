@@ -11,5 +11,8 @@
             "email": "rob.lasota@gmail.com"
         }
     ],
+    "require": {
+        "binarytorch/larecipe": "^1.2"
+    },
     "minimum-stability": "dev"
 }
