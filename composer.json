@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "binarytorch/larecipe": "^1.2"
+        "binarytorch/larecipe": "^1.2",
+        "erusev/parsedown": "^1.7"
     },
     "autoload": {
         "classmap": [
