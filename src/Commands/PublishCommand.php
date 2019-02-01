@@ -29,7 +29,7 @@ class PublishCommand extends Command
      * @var array
      */
     protected $dirs = [
-        'vendor/larabelt/docs/config' => 'config/belt',
+        'vendor/larabelt/docs/docs' => 'docs/raw',
     ];
 
 }

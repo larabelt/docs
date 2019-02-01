@@ -1,3 +1,0 @@
-# Larabelts
-
-Main site page
