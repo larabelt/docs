@@ -54,6 +54,7 @@ class BeltDocsServiceProvider extends ServiceProvider
         $this->loadJsonTranslationsFrom(storage_path('app/public/lang'), '');
 
         // commands
+        $this->commands(Belt\Docs\Commands\GenerateCommand::class);
         $this->commands(Belt\Docs\Commands\PublishCommand::class);
     }
 
