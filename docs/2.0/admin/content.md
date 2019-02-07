@@ -26,6 +26,14 @@ To create a Page, start by going to Content → Page and click on the "Add Page"
 * **Meta Description** this is for SEO purposes and shows up in the site's search results
 * **Meta Keywords​​** Add keywords for SEO purposes if you desire
 
+Field Label  | Field Note
+------------- | -------------
+Is active | Check to make page active
+Name | Fill in name of your Page
+Meta Title | will be page title and will show up on tab in browser
+Meta Description | this is for SEO purposes and shows up in the site's search results
+Meta Keywords | Add keywords for SEO purposes if you desire
+
 Click on Save. Additional fields and tabs will become available.
 
 * **Slug** ​​auto-populates from title
