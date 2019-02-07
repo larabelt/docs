@@ -12,13 +12,13 @@
 
 The CMS tool is meant to be an easy to use interface to allow the creation and management of website content.
 
-Users can log in here:​ {{url}}/login
+Users can log in here:​ {{ $url }}/login
 
 Once logged in, the user will be presented with the main dashboard screen.
 
 Along the top is the User Identification and User Settings area. The left pane contains the Admin's Primary CMS.
 
-![picture alt]({{url_images}}/main-admin-dashboard.png "")
+![picture alt]({{ $url_images }}/main-admin-dashboard.png "")
 
 **Figure 2: Main Administration Dashboard**
 
@@ -27,7 +27,7 @@ Along the top is the User Identification and User Settings area. The left pane c
 
 Here the user will find the main functional areas and pieces to construct, manage, and maintain the content within the website.
 
-![picture alt]({{url_images}}/left-hand-navigation.png "")
+![picture alt]({{ $url_images }}/left-hand-navigation.png "")
 
 **Figure 2: Top Level Admin Navigation**
 
@@ -49,7 +49,7 @@ Where the items needed to create pages are managed, including:
 * Pages: create and update site pages
 * Posts: not used at this time
 * Terms: Used in the following situations:
-    * Cruise: Items that are using the term Cruise, appear on the {{url}}/cruise-guests​ page
+    * Cruise: Items that are using the term Cruise, appear on the {{ $url }}/cruise-guests​ page
     * Landmark: Unique feature if a POI is a place like a waterfall. You want to reference the Term – Landmark – Waterfall under the POI terms section. This applies to waterfalls, beaches, hiking trails, must see, dive sites, gorge
 
 ### POIs
@@ -82,7 +82,7 @@ Data Management areas are generally made up of the same elements to allow consis
 
 **Action Columns​​** Allows you to Add, Modify, or Delete managed data.
 
-![picture alt]({{url_images}}/manager.png "")
+![picture alt]({{ $url_images }}/manager.png "")
 
 **Figure 3: Main Data Management Screen**
 
@@ -100,6 +100,6 @@ Detail Management areas are generally made up of the same elements to allow cons
 **Save Button​​** commits the data to the database and is made available immediately. ​(Note: Upon
 initial save, additional attribute tabs will be made available.)
 
-![picture alt]({{url_images}}/editor.png "")
+![picture alt]({{ $url_images }}/editor.png "")
 
 **Figure 4: Detail Data Management Screen**
